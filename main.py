@@ -3,7 +3,7 @@ import requests
 login = "http://192.168.1.14:8080/jsonrpc"
 username = "admin"
 password = "admin"
-service_vpn3 = "http://192.168.1.14:8080/webui-one/ServiceManager/l3vpn:vpn/l3vpn"
+service_vpn3 = "http://192.168.1.14:8080/webui-one/ServiceManager"
 service_commit = "http://192.168.1.14:8080/webui-one/CommitManager"
 session = requests.session()
 
@@ -16,6 +16,7 @@ def loger(user, passw):
     if response.status_code == 200 and "result" in response.json():
         print("Login Successful! ")
         print(response.cookies.get("sessionid_8080"))
+        print(response.headers.get("Allow"))
         return response.cookies.get("sessionid_8080")
     else:
         return "Login failed."
@@ -25,7 +26,7 @@ def create_service():
     sessionid = loger(username, password)
     x = {
         "Cookie": "sessionid_8080=" + sessionid,
-        "method": "login"
+        "method": "GET"
     }
 
     configuration = {
@@ -68,6 +69,10 @@ def create_service():
         print(f"Failed to create configuration. Status code: {response.status_code}")
         print("Response content:")
         print(response.reason)
+        print(1)
+        print(response.headers.get("Allow"))
+        print(2)
+        print(response.text)
 
 
 create_service()
