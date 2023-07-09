@@ -22,6 +22,20 @@ def loger(user, passw):
         return "Login failed."
 
 
+def run_action():
+    sessionid = loger(username, password)
+    x = {
+        "Cookie": "sessionid_8080=" + sessionid,
+        "method": "GET"
+    }
+
+
+    response = session.post(service_vpn3,
+                            json={"jsonrpc": "2.0",
+                                  "method": "run_action",
+                                  "params": {"th": 2, "path": "/l3vpn:vpn/l3vpn{volvo}/check-sync"}})
+
+
 def create_service():
     sessionid = loger(username, password)
     x = {
@@ -74,5 +88,3 @@ def create_service():
         print(2)
         print(response.text)
 
-
-create_service()
