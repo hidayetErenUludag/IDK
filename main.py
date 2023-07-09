@@ -23,8 +23,10 @@ def loger(user, passw):
 
 def create_service():
     sessionid = loger(username, password)
-    x = {"Cookie": sessionid,
-         "method": "login"}
+    x = {
+        "Cookie": "sessionid_8080=" + sessionid,
+        "method": "login"
+    }
 
     configuration = {
         "l3vpn": {
@@ -65,7 +67,7 @@ def create_service():
     else:
         print(f"Failed to create configuration. Status code: {response.status_code}")
         print("Response content:")
-        print(response)
+        print(response.reason)
 
 
 create_service()
