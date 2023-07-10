@@ -2,7 +2,7 @@ import json
 import requests
 
 # Define the URL for the JSON-RPC endpoint
-url = "http://192.168.1.15:8080/jsonrpc"
+url = "http://192.168.1.19:8080/jsonrpc"
 
 # Prepare payload for authentication request
 payload = {
@@ -45,7 +45,7 @@ th_id = json.loads(response)["result"]["th"]
 # Get the transaction information
 payload = {"jsonrpc": "2.0", "id": 11, "method": "get_trans"}
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
-req.text
+print(req.text)
 
 # Get the list of keys for ztp-fttb entries
 payload = {
@@ -57,7 +57,7 @@ payload = {
 
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
-ztp_entries = json.loads(response)["result"]["keys"]
+#ztp_entries = json.loads(response)["result"]["keys"]
 
 # Get specific values for a ztp-fttb entry
 payload = {
@@ -74,7 +74,8 @@ payload = {
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
 ztp_entry = json.loads(response)
-ztp_entry["result"]["values"][0]["value"]
+print("a", ztp_entry)
+#ztp_entry["result"]["values"][0]["value"]
 
 # Get values for another ztp-fttb entry
 payload = {
@@ -83,7 +84,7 @@ payload = {
     "method": "get_values",
     "params": {
         "th": th_id,
-        "path": "/ztp-fttb:ztp-fttb{192.168.85.11}/new-vs-rma",
+        "path": "/ztp-fttb:ztp-fttb{192.168.1.19}/new-vs-rma",
         "leafs": ["new"]
     }
 }
@@ -91,7 +92,7 @@ payload = {
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
 ztp_entry = json.loads(response)
-ztp_entry["result"]["values"][0]["value"]
+#ztp_entry["result"]["values"][0]["value"]
 
 # Validate the transaction changes
 payload = {
@@ -114,14 +115,16 @@ payload = {
 
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
-
+print(response)
 # Perform a dry-run-native of the commit
-payload = {
+payload1 = {
     "jsonrpc": "2.0",
     "id": 168,
     "method": "commit",
-    "params": {"th": "th_id", "flags": ["dry-run=native"]}
+    "params": {"th": th_id, "flags": ["dry-run=native"]}
 }
+commit = requests.post(url, cookies=cookies_string, json=payload1, verify=False)
+print(commit.text)
 
 # Get a list of keys for authentication users
 payload = {
