@@ -87,7 +87,19 @@ def syncer():
     return response.text
 
 
+def initiate():
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "create",
+        "params": {"th": 2, "path": "/aaa/authentication/users/user{admin}"}
+    }
+    response = requests.post(url, cookies=auther(), json=payload, verify=False)
+    return response.text
+
+
 print(transaction_info())
 print(values())
 print(specific_value())
 print(syncer())
+print(initiate())

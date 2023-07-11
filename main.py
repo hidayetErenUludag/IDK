@@ -174,7 +174,7 @@ payload = {
     "method": "create",
     "params": {"th": 2, "path": "/aaa/authentication/users/user{test}"}
 }
-
+"""
 # Show the configuration for a specific path
 payload = {
     "jsonrpc": "2.0",
@@ -188,3 +188,4 @@ payload = {
         "result_as": "json3"
     }
 }
+"""
