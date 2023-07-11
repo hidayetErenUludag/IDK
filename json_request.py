@@ -1,5 +1,4 @@
 import json
-import time
 
 import requests
 
@@ -38,7 +37,6 @@ def get_th_id():
 
 def transaction_info():
     get_th_id()
-    time.sleep(1)
     payload = {
         "jsonrpc": "2.0",
         "id": 11,
@@ -50,4 +48,33 @@ def transaction_info():
     return x
 
 
+def values():
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "get_list_keys",
+        "params": {"th": 1, "path": "/aaa/authentication/users/user"}
+    }
+    paylo = requests.post(url, cookies=auther(), json=payload, verify=False)
+    return paylo.text
+
+
+def specific_value():
+    get_th_id()
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "get_values",
+        "params": {
+            "th": get_th_id(),
+            "path": "/aaa/authentication/users/user{admin}",
+            "leafs": ["uid", "gid", "password", "ssh_keydir", "homedir"]
+        }
+    }
+    response = requests.post(url, cookies=auther(), json=payload, verify=False)
+    return response.text
+
+
 print(transaction_info())
+print(values())
+print(specific_value())

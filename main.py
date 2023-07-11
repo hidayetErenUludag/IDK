@@ -62,7 +62,7 @@ payload = {
         "path": "/ztp-fttb:ztp-fttb{1.1.1.1}",
         "leafs": ["dhcp_ip", "subnet", "device_model"]
     }
-}"""
+}
 
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
@@ -118,7 +118,9 @@ payload1 = {
     "params": {"th": th_id, "flags": ["dry-run=native"]}
 }
 commit = requests.post(url, cookies=cookies_string, json=payload1, verify=False)
-print(commit.text)
+print("a", commit.text)
+"""
+
 
 # Get a list of keys for authentication users
 payload10 = {
@@ -144,16 +146,18 @@ payload = {
 }
 
 # Get specific values for an authentication user
-payload = {
+payload22 = {
     "jsonrpc": "2.0",
     "id": 1,
     "method": "get_values",
     "params": {
         "th": th_id,
-        "path": "/aaa/authentication/users/user{test}",
+        "path": "/aaa/authentication/users/user{admin}",
         "leafs": ["uid", "gid", "password", "ssh_keydir", "homedir"]
     }
 }
+response = requests.post(url, cookies=th_id, json=payload, verify=False)
+print(response)
 
 # Run an action
 payload = {
