@@ -75,6 +75,19 @@ def specific_value():
     return response.text
 
 
+def syncer():
+    get_th_id()
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "run_action",
+        "params": {"th": 1, "path": "/devices/sync-from"}
+    }
+    response = requests.post(url, cookies=auther(), json=payload, verify=False)
+    return response.text
+
+
 print(transaction_info())
 print(values())
 print(specific_value())
+print(syncer())
