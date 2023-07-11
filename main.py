@@ -15,6 +15,8 @@ payload = {
 # Send authentication request to obtain cookies
 authenticate = requests.post(url, json=payload, verify=False)
 cookies_string = authenticate.cookies
+
+
 # Start a new read transaction
 payload = {
     "jsonrpc": "2.0",
@@ -26,6 +28,7 @@ payload = {
 # Send the request with the cookies from authentication
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
+
 th_id = json.loads(response)["result"]["th"]
 
 
@@ -34,6 +37,7 @@ payload = {"jsonrpc": "2.0", "id": 11, "method": "get_trans"}
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 print(req.text)
 
+""""
 # Get the list of keys for ztp-fttb entries
 payload = {
     "jsonrpc": "2.0",
@@ -58,7 +62,7 @@ payload = {
         "path": "/ztp-fttb:ztp-fttb{1.1.1.1}",
         "leafs": ["dhcp_ip", "subnet", "device_model"]
     }
-}
+}"""
 
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
