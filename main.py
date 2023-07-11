@@ -15,7 +15,6 @@ payload = {
 # Send authentication request to obtain cookies
 authenticate = requests.post(url, json=payload, verify=False)
 cookies_string = authenticate.cookies
-
 # Start a new read transaction
 payload = {
     "jsonrpc": "2.0",
@@ -29,18 +28,6 @@ req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
 th_id = json.loads(response)["result"]["th"]
 
-# Start a new read-write transaction
-payload = {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "new_trans",
-    "params": {"db": "running", "mode": "read_write"}
-}
-
-# Send the request with the cookies from authentication
-req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
-response = req.text
-th_id = json.loads(response)["result"]["th"]
 
 # Get the transaction information
 payload = {"jsonrpc": "2.0", "id": 11, "method": "get_trans"}
@@ -57,6 +44,8 @@ payload = {
 
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
+print(1)
+print(json.loads(response))
 #ztp_entries = json.loads(response)["result"]["keys"]
 
 # Get specific values for a ztp-fttb entry
@@ -114,8 +103,9 @@ payload = {
 }
 
 req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
-response = req.text
-print(response)
+response2 = req.text
+print(response2)
+
 # Perform a dry-run-native of the commit
 payload1 = {
     "jsonrpc": "2.0",
@@ -127,12 +117,15 @@ commit = requests.post(url, cookies=cookies_string, json=payload1, verify=False)
 print(commit.text)
 
 # Get a list of keys for authentication users
-payload = {
+payload10 = {
     "jsonrpc": "2.0",
     "id": 1,
     "method": "get_list_keys",
     "params": {"th": 1, "path": "/aaa/authentication/users/user"}
 }
+paylo = requests.post(url, cookies_string, json=payload10, verify=False)
+print(paylo.text)
+
 
 # Set a value for a specific path
 payload = {
