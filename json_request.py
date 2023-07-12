@@ -138,8 +138,18 @@ def create():
             "path": "/l3vpn:vpn/l3vpn{reno}"
         }
     }
+
     response3 = requests.post(url, cookies=auther(), json=load, verify=False)
-    return response2.text, req.text, response3.text
+
+    payload1 = {
+        "jsonrpc": "2.0",
+        "id": th_id,
+        "method": "commit",
+        "params": {"th": th_id}
+    }
+    response4 = requests.post(url, cookies=auther(), json=payload1, verify=False)
+
+    return response2.text, req.text, response3.text, response4.text
 
 
 print(create())

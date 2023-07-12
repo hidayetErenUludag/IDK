@@ -86,7 +86,7 @@ req = requests.post(url, cookies=cookies_string, json=payload, verify=False)
 response = req.text
 ztp_entry = json.loads(response)
 #ztp_entry["result"]["values"][0]["value"]
-
+"""
 # Validate the transaction changes
 payload = {
     "jsonrpc": "2.0",
@@ -119,7 +119,7 @@ payload1 = {
 }
 commit = requests.post(url, cookies=cookies_string, json=payload1, verify=False)
 print("a", commit.text)
-"""
+
 
 
 # Get a list of keys for authentication users
