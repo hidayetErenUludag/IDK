@@ -98,8 +98,47 @@ def initiate():
     return response.text
 
 
-print(transaction_info())
-print(values())
-print(specific_value())
-print(syncer())
-print(initiate())
+def create():
+    trans = {
+        "jsonrpc": "2.0",
+        "id": 34,
+        "method": "new_trans",
+        "params": {
+            "db": "running",
+            "mode": "read_write",
+            "conf_mode": "private",
+            "tag": "webui-one"
+        }
+    }
+    response = requests.post(url, cookies=auther(), json=trans, verify=False)
+
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 116,
+        "method": "create",
+        "params": {
+            "th": 1,
+            "path": "/l3vpn:vpn/l3vpn{volvo}"
+        }
+    }
+    response2 = requests.post(url, cookies=auther(), json=payload, verify=False)
+
+    load = {
+        "jsonrpc": "2.0",
+        "id": 47,
+        "method": "load",
+        "params": {
+            "th": 1,
+            "data": {
+                "as-number": "65101"
+            },
+            "format": "json",
+            "path": "/l3vpn:vpn/l3vpn{volvo}"
+        }
+    }
+    response3 = requests.post(url, cookies=auther(), json=load, verify=False)
+
+    return response2.text, "\n ", response.text, response3.text
+
+
+print(create())
