@@ -168,7 +168,7 @@ payload = {
 }
 
 # Create a list entry
-payload = {
+payload3 = {
     "jsonrpc": "2.0",
     "id": 1,
     "method": "create",

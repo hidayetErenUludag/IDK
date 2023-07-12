@@ -110,14 +110,16 @@ def create():
             "tag": "webui-one"
         }
     }
-    response = requests.post(url, cookies=auther(), json=trans, verify=False)
+    req = requests.post(url, cookies=auther(), json=trans, verify=False)
+    res = req.text
+    th_id = json.loads(res)["result"]["th"]
 
     payload = {
         "jsonrpc": "2.0",
         "id": 116,
         "method": "create",
         "params": {
-            "th": 1,
+            "th": th_id,
             "path": "/l3vpn:vpn/l3vpn{reno}"
         }
     }
@@ -128,7 +130,7 @@ def create():
         "id": 47,
         "method": "load",
         "params": {
-            "th": 1,
+            "th": th_id,
             "data": {
                 "as-number": "61601"
             },
@@ -137,7 +139,7 @@ def create():
         }
     }
     response3 = requests.post(url, cookies=auther(), json=load, verify=False)
-    return response2.text, response.text, response3.text
+    return response2.text, req.text, response3.text
 
 
 print(create())
