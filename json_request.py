@@ -120,7 +120,7 @@ def create():
         "method": "create",
         "params": {
             "th": th_id,
-            "path": "/l3vpn:vpn/l3vpn{reno}"
+            "path": "/l3vpn:vpn/l3vpn{alfa_romeo}"
         }
     }
     response2 = requests.post(url, cookies=auther(), json=payload, verify=False)
@@ -135,7 +135,7 @@ def create():
                 "as-number": "61601"
             },
             "format": "json",
-            "path": "/l3vpn:vpn/l3vpn{reno}"
+            "path": "/l3vpn:vpn/l3vpn{alfa_romeo}"
         }
     }
 
