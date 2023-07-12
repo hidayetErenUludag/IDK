@@ -66,7 +66,7 @@ def specific_value():
         "id": 1,
         "method": "get_values",
         "params": {
-            "th": get_th_id(),
+            "th": 1,
             "path": "/aaa/authentication/users/user{admin}",
             "leafs": ["uid", "gid", "password", "ssh_keydir", "homedir"]
         }
@@ -92,7 +92,7 @@ def initiate():
         "jsonrpc": "2.0",
         "id": 1,
         "method": "create",
-        "params": {"th": 2, "path": "/aaa/authentication/users/user{admin}"}
+        "params": {"th": 1, "path": "/aaa/authentication/users/user{admin}"}
     }
     response = requests.post(url, cookies=auther(), json=payload, verify=False)
     return response.text
@@ -118,7 +118,7 @@ def create():
         "method": "create",
         "params": {
             "th": 1,
-            "path": "/l3vpn:vpn/l3vpn{volvo}"
+            "path": "/l3vpn:vpn/l3vpn{reno}"
         }
     }
     response2 = requests.post(url, cookies=auther(), json=payload, verify=False)
@@ -133,12 +133,13 @@ def create():
                 "as-number": "65101"
             },
             "format": "json",
-            "path": "/l3vpn:vpn/l3vpn{volvo}"
+            "path": "/l3vpn:vpn/l3vpn{reno}"
         }
     }
     response3 = requests.post(url, cookies=auther(), json=load, verify=False)
 
-    return response2.text, "\n ", response.text, response3.text
+    return response2.text, response.text, response3.text
+
 
 
 print(create())
