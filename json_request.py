@@ -141,15 +141,24 @@ def create():
 
     response3 = requests.post(url, cookies=auther(), json=load, verify=False)
 
-    payload1 = {
+    validate_payload = {
+        "jsonrpc": "2.0",
+        "id": th_id,
+        "method": "validate_commit",
+        "params": {"th": th_id}
+    }
+    validate_response = requests.post(url, cookies=auther(), json=validate_payload, verify=False)
+
+    commit_payload = {
         "jsonrpc": "2.0",
         "id": th_id,
         "method": "commit",
         "params": {"th": th_id}
     }
-    response4 = requests.post(url, cookies=auther(), json=payload1, verify=False)
+    commit_response = requests.post(url, cookies=auther(), json=commit_payload, verify=False)
 
-    return response2.text, req.text, response3.text, response4.text
+    return response2.text, req.text, response3.text, validate_response.text, commit_response.text
+
 
 
 print(create())
