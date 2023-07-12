@@ -130,16 +130,14 @@ def create():
         "params": {
             "th": 1,
             "data": {
-                "as-number": "65101"
+                "as-number": "61601"
             },
             "format": "json",
             "path": "/l3vpn:vpn/l3vpn{reno}"
         }
     }
     response3 = requests.post(url, cookies=auther(), json=load, verify=False)
-
     return response2.text, response.text, response3.text
-
 
 
 print(create())
